@@ -28,19 +28,21 @@ class PostIndexItem extends Component {
         style={styles.thumbnail}/>)
     }
     let title = post.data.title;
-    if (title.length > 70) {
-      title = title.slice(0, 70) + "...";
+    if (title.length > 100) {
+      title = title.slice(0, 100) + "...";
     }
     const score = post.data.score;
     const author = post.data.author;
-
+    const domain = post.data.domain;
+    const subreddit = post.data.subreddit_name_prefixed;
     return(
       <View style={styles.postIndexItem}>
         {img}
         <View style={styles.postText}>
           <Text style={styles.title}>Title: {title}</Text>
+          <Text style={styles.domain}>({domain})</Text>
           <Text style={styles.score}>Score: {post.data.score}</Text>
-          <Text style={styles.author}>/u/{author}</Text>
+          <Text style={styles.author}>/u/{author} in {subreddit}</Text>
         </View>
       </View>
 

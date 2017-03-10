@@ -14,7 +14,6 @@ export default class PostsIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
       refreshing: false,
     };
     this.renderRow = this.renderRow.bind(this);
@@ -45,10 +44,10 @@ export default class PostsIndex extends Component {
   }
 
   render () {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     let posts = this.props.posts;
+    console.log(posts);
     if (posts instanceof Array) {
-      console.log(posts);
-      const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       return (
         <View>
           <View style={styles.header}>
