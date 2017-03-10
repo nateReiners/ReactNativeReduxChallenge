@@ -5,57 +5,42 @@ import {
   StyleSheet,
   Image,
   ListView,
+  RefreshControl,
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-
+import PostIndexItem from './PostIndexItem';
 export default class PostsIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
+      refreshing: false,
     };
     this.renderRow = this.renderRow.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ loading: true });
+    this.setState({ refreshing: true });
     const that = this;
     this.props.requestPosts().then(
       (res) => {
-        that.setState({ loading: false });
+        that.setState({ refreshing: false });
       }
     );
   }
 
+  _onRefresh() {
+    this.setState({refreshing: true});
+    console.log("refreshing...");
+    this.props.requestPosts().then(() => {
+      this.setState({refreshing: false});
+    });
+  }
+
   renderRow(post) {
-    let img;
-    if (post.data.thumbnail !== "default") {
-      let uriObj = {
-        uri: post.data.thumbnail,
-      };
-      img = (<Image source={uriObj} style={styles.thumbnail}/>)
-    } else {
-      img = (<Image source={require("../../images/defaultThumb.png")} style={styles.thumbnail}/>)
-
-    }
-    let title = post.data.title;
-    if (title.length > 70) {
-      title = title.slice(0, 70) + "...";
-    }
-    const score = post.data.score;
-    const author = post.data.author;
-
-    return(
-      <View style={styles.postIndexItem}>
-        {img}
-        <View style={styles.postText}>
-          <Text style={styles.title}>Title: {title}</Text>
-          <Text style={styles.score}>Score: {post.data.score}</Text>
-          <Text style={styles.author}>/u/{author}</Text>
-        </View>
-      </View>
-
+    return (
+      <PostIndexItem post={post}/>
     );
   }
 
@@ -72,6 +57,12 @@ export default class PostsIndex extends Component {
           <ListView
             dataSource={ds.cloneWithRows(posts)}
             renderRow={this.renderRow}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh.bind(this)}
+              />
+            }
           />
         </View>
       );
