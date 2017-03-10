@@ -10,6 +10,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import PostIndexItem from './PostIndexItem';
+
+
 export default class PostsIndex extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +41,7 @@ export default class PostsIndex extends Component {
 
   renderRow(post) {
     return (
-      <PostIndexItem post={post}/>
+      <PostIndexItem post={post} navigator={this.props.navigator}/>
     );
   }
 
@@ -71,10 +73,10 @@ export default class PostsIndex extends Component {
           <ActivityIndicator
               animating={this.state.loading}
               color="black"
-              style={[styles.centering, {height: 200}]}
+              style={[styles.centering, {height: 160}]}
               size="large"
             />
-          <Text style={styles.loadingMessage}>Loading Front Page Posts...</Text>
+          <Text style={styles.loadingMessage}>Loading Reddit Viewer...</Text>
         </View>
       );
     }
@@ -90,9 +92,10 @@ const styles = StyleSheet.create({
     zIndex: 1,
     backgroundColor: 'white',
     borderBottomWidth: 1,
-    borderColor: 'black',
+    borderColor: '#dbdbdb',
   },
   headerText: {
+    fontWeight: 'bold',
     fontSize: 16,
     position: 'absolute',
   },
@@ -128,6 +131,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingMessage: {
-    fontSize: 20
+    fontFamily: 'Roboto',
+    fontSize: 20,
   }
 });
