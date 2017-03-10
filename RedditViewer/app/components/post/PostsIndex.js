@@ -39,17 +39,20 @@ export default class PostsIndex extends Component {
       img = (<Image source={require("../../images/defaultThumb.png")} style={styles.thumbnail}/>)
 
     }
-    const title = post.data.title;
+    let title = post.data.title;
+    if (title.length > 70) {
+      title = title.slice(0, 70) + "...";
+    }
     const score = post.data.score;
-    const user = post.data.user;
+    const author = post.data.author;
 
     return(
       <View style={styles.postIndexItem}>
         {img}
         <View style={styles.postText}>
-          <Text style={styles.title}>Title: {post.data.title}</Text>
-          <Text>Score: {post.data.score}</Text>
-          <Text></Text>
+          <Text style={styles.title}>Title: {title}</Text>
+          <Text style={styles.score}>Score: {post.data.score}</Text>
+          <Text style={styles.author}>/u/{author}</Text>
         </View>
       </View>
 
@@ -90,34 +93,39 @@ export default class PostsIndex extends Component {
 }
 const styles = StyleSheet.create({
   header: {
-    height: 50,
+    height: 30,
     alignSelf: 'stretch',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
+    borderBottomWidth: 1,
+    borderColor: 'black',
   },
   headerText: {
-    fontSize: 20,
-    color: 'white',
+    fontSize: 16,
     position: 'absolute',
   },
   postIndexItem: {
     flexDirection: 'row',
-    alignItems: 'center',
-    margin: 5,
-    borderWidth: 2,
+    marginLeft: 5,
+    marginRight: 5,
+    paddingTop: 5,
+    paddingBottom: 5,
+    borderBottomWidth: 1,
     borderColor: 'black',
   },
   postText: {
-    padding: 5,
+    paddingLeft: 10,
     flexDirection: 'column',
+    alignItems: 'flex-start',
     flex: 1,
   },
   title: {
     fontWeight: 'bold',
     flexDirection: 'column',
     flexWrap: 'wrap',
+    paddingBottom: 5,
   },
   thumbnail: {
     height: 150,
