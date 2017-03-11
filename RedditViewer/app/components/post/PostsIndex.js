@@ -15,9 +15,7 @@ import PostIndexItem from './PostIndexItem';
 export default class PostsIndex extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      refreshing: false,
-    };
+    this.state = { refreshing: false };
     this.renderRow = this.renderRow.bind(this);
   }
 
@@ -53,7 +51,7 @@ export default class PostsIndex extends Component {
       return (
         <View>
           <View style={styles.header}>
-            <Text style={styles.headerText}>Front Page Posts</Text>
+            <Text style={styles.headerText}>REDDIT VIEWER</Text>
           </View>
           <ListView
             dataSource={ds.cloneWithRows(posts)}
@@ -65,18 +63,18 @@ export default class PostsIndex extends Component {
               />
             }
           />
-        </View>
-      );
+       </View>
+     );
     } else {
       return (
         <View style={styles.loading}>
+        <Text style={styles.loadingMessage}>FETCHING TOP POSTS...</Text>
           <ActivityIndicator
               animating={this.state.loading}
-              color="black"
+              color="#5daf26"
               style={[styles.centering, {height: 160}]}
               size="large"
             />
-          <Text style={styles.loadingMessage}>Loading Reddit Viewer...</Text>
         </View>
       );
     }
@@ -85,7 +83,7 @@ export default class PostsIndex extends Component {
 }
 const styles = StyleSheet.create({
   header: {
-    height: 30,
+    height: 23,
     alignSelf: 'stretch',
     justifyContent: 'center',
     alignItems: 'center',
@@ -96,35 +94,8 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontWeight: 'bold',
-    fontSize: 16,
-    position: 'absolute',
-  },
-  postIndexItem: {
-    flexDirection: 'row',
-    marginLeft: 5,
-    marginRight: 5,
-    paddingTop: 5,
-    paddingBottom: 5,
-    borderBottomWidth: 1,
-    borderColor: 'black',
-  },
-  postText: {
-    paddingLeft: 10,
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    flex: 1,
-  },
-  title: {
-    fontWeight: 'bold',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
-    paddingBottom: 5,
-  },
-  thumbnail: {
-    height: 150,
-    flex: 1,
-    borderRightWidth: 1,
-    borderColor: 'black',
+    fontSize: 18,
+    color: '#5daf26',
   },
   loading: {
     justifyContent: 'center',
@@ -132,6 +103,9 @@ const styles = StyleSheet.create({
   },
   loadingMessage: {
     fontFamily: 'Roboto',
-    fontSize: 20,
+    fontSize: 22,
+    paddingTop: 70,
+    fontWeight: 'bold',
+    color: '#5daf26',
   }
 });

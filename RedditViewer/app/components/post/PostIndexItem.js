@@ -4,9 +4,7 @@ import {
   Text,
   StyleSheet,
   Image,
-  ListView,
-  ActivityIndicator,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 
 class PostIndexItem extends Component {
@@ -15,9 +13,13 @@ class PostIndexItem extends Component {
     this.createDetailScene = this.createDetailScene.bind(this);
   }
 
-  createDetailScene() {
-    console.log("hit createDetailScene from PostIndexItem");
-    this.props.navigator.push({name: 'DetailScene'});
+  createDetailScene(post) {
+    this.props.navigator.push({
+      name: 'Detail',
+      passProps: {
+        post: post
+      }
+    });
   }
 
   render() {
@@ -39,26 +41,28 @@ class PostIndexItem extends Component {
     const subreddit = post.data.subreddit_name_prefixed;
 
     let title = post.data.title;
-    if (title.length > 100) {
-      title = `${post.data.title.slice(0, 100)}... (${domain})`;
+    if (title.length > 50) {
+      title = `${post.data.title.slice(0, 50)}... (${domain})`;
     } else {
       title = `${post.data.title}... (${domain})`
     }
 
 
     return(
-      <TouchableHighlight onPress={() => this.createDetailScene()}>
+      <TouchableOpacity onPress={() => this.createDetailScene(post)}>
         <View style={styles.postIndexItem}>
           {img}
           <View style={styles.postText}>
-            <Text style={styles.title}>{title}</Text>
-            <View>
-              <Text style={styles.score}>Score: {post.data.score}</Text>
-              <Text style={styles.author}>/u/{author} in {subreddit}</Text>
-            </View>
+              <Text style={styles.title}>{title}</Text>
+              <View style={styles.scoreView}>
+                <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
+                <Text style={styles.score}>{post.data.score}</Text>
+              </View>
+              <Text style={styles.author}>by {author}</Text>
+              <Text style={styles.author}>in {subreddit}</Text>
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   }
 }
@@ -68,34 +72,46 @@ export default PostIndexItem;
 const styles = StyleSheet.create({
   postIndexItem: {
     flexDirection: 'row',
-    marginLeft: 5,
-    marginRight: 5,
-    paddingTop: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    paddingTop: 8,
     paddingBottom: 10,
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     borderColor: '#dbdbdb',
   },
   postText: {
-    paddingLeft: 10,
+    paddingLeft: 15,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     flex: 1,
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
     flexDirection: 'column',
     flexWrap: 'wrap',
     paddingBottom: 5,
+    color: 'black',
+  },
+  scoreView: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   score: {
-    fontSize: 14,
-    paddingBottom: 5,
+    fontSize: 16,
+  },
+  upArrow: {
+    height: 16,
+    width: 20,
+    marginRight: 2,
+  },
+  author: {
+    fontSize: 16,
   },
   thumbnail: {
     height: 150,
     flex: 1,
     borderRightWidth: 1,
     borderColor: 'black',
+    alignSelf: 'center'
   },
 });

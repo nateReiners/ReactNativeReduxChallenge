@@ -9,7 +9,7 @@ export const fetchPosts = () => (
     }
   })
   .then((response) => response.json())
-   .then((responseJson) => {
+  .then((responseJson) => {
      return responseJson.data.children;
    })
    .catch((error) => {
