@@ -32,7 +32,6 @@ export default class RedditViewer extends Component {
 
 
   render() {
-
     const routes = [
       {name: 'Index'},
       {name: 'Detail'}

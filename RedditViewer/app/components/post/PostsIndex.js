@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingMessage: {
-    fontFamily: 'Roboto',
     fontSize: 22,
     paddingTop: 70,
     fontWeight: 'bold',
