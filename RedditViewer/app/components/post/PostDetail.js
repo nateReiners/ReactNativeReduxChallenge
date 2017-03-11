@@ -51,9 +51,16 @@ export default class PostDetail extends Component {
     const title = post.title;
     const currentTime = Date.now();
     const timeDiff = this.elapsedTime(post.created_utc, currentTime);
+
     let img;
-    if (post.thumbnail !== "default") {
-      let uriObj = {uri: post.thumbnail};
+    let uriObj;
+    const url = post.url;
+    if (url.slice(url.length - 4, url.length) === ".gif") {
+      let uriObj = {uri: url};
+      img = <Image source={uriObj} style={styles.thumbnail}/>
+    }
+    else if (post.thumbnail !== "default") {
+      uriObj = {uri: post.thumbnail};
       img = (<Image source={uriObj} style={styles.thumbnail}/>)
     } else {
       img = (<Image
