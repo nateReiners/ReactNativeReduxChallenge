@@ -7,6 +7,7 @@ import {
   ListView,
   RefreshControl,
   ActivityIndicator,
+  StatusBar,
   TouchableOpacity,
 } from 'react-native';
 import PostIndexItem from './PostIndexItem';
@@ -47,9 +48,15 @@ export default class PostsIndex extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     let posts = this.props.posts;
     console.log(posts);
+    const hiddenBar = <StatusBar
+                         backgroundColor="blue"
+                         barStyle="light-content"
+                         hidden={true}
+                       />;
     if (posts instanceof Array) {
       return (
         <View style={styles.container}>
+          {hiddenBar}
           <View style={styles.header}>
             <Text style={styles.headerText}>REDDIT VIEWER</Text>
           </View>
@@ -68,6 +75,7 @@ export default class PostsIndex extends Component {
     } else {
       return (
         <View style={styles.loading}>
+        {hiddenBar}
         <Text style={styles.loadingMessage}>FETCHING TOP POSTS...</Text>
           <ActivityIndicator
               animating={this.state.loading}

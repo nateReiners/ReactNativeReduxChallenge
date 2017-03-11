@@ -3,6 +3,7 @@ import {
   Navigator,
   View,
   StyleSheet,
+  StatusBar,
   Text,
 } from 'react-native';
 import { Provider } from 'react-redux';
