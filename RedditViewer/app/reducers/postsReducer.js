@@ -1,6 +1,4 @@
 const RECEIVE_POSTS = "RECEIVE POSTS";
-import { merge } from 'lodash';
-
 
 const postsReducer = (state = {}, action) => {
   Object.freeze(state);

@@ -30,17 +30,17 @@ export default class PostDetail extends Component {
     const elapsed = (current - previous) / 100000;
 
     if (elapsed < msPerMinute) {
-         return 'about' + Math.round(elapsed/1000) + ' seconds ago';
+         return 'about ' + Math.round(elapsed/1000) + ' seconds ago';
     } else if (elapsed < msPerHour) {
-         return 'about' + Math.round(elapsed/msPerMinute) + ' minutes ago';
+         return 'about ' + Math.round(elapsed/msPerMinute) + ' minutes ago';
     } else if (elapsed < msPerDay ) {
-         return 'about' + Math.round(elapsed/msPerHour ) + ' hours ago';
+         return 'about ' + Math.round(elapsed/msPerHour ) + ' hours ago';
     } else if (elapsed < msPerMonth) {
-        return 'about' + Math.round(elapsed/msPerDay) + ' days ago';
+        return 'about ' + Math.round(elapsed/msPerDay) + ' days ago';
     } else if (elapsed < msPerYear) {
-        return 'about' + Math.round(elapsed/msPerMonth) + ' months ago';
+        return 'about ' + Math.round(elapsed/msPerMonth) + ' months ago';
     } else {
-        return 'about' + Math.round(elapsed/msPerYear ) + ' years ago';
+        return 'about ' + Math.round(elapsed/msPerYear ) + ' years ago';
     }
 }
 
