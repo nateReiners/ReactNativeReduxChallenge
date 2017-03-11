@@ -3,8 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
-  TouchableOpacity,
+  TouchableHighlight,
   Image,
 } from 'react-native';
 
@@ -65,11 +64,12 @@ export default class PostDetail extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Button
-            style={styles.backButton} title={"BACK TO VIEWER"}
-            onPress={this.createIndexScene}
-            color={'#5daf26'}
-             />
+          <TouchableHighlight style={styles.button} onPress={this.createIndexScene}>
+          <Image
+            style={styles.backArrow}
+            source={require('../../images/leftArrow.png')}
+          />
+          </TouchableHighlight>
           <Text style={styles.headerText}>POST DETAILS</Text>
         </View>
         <View style={styles.postIndexItem}>
@@ -105,11 +105,23 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#dbdbdb',
   },
+  button: {
+    backgroundColor: '#5daf26',
+    padding: 8,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  backArrow: {
+    height: 24,
+    width: 30,
+  },
   headerText: {
     flex: 1,
     textAlign: 'right',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 20,
     color: '#5daf26',
   },
   postIndexItem: {
