@@ -49,7 +49,7 @@ export default class PostsIndex extends Component {
     console.log(posts);
     if (posts instanceof Array) {
       return (
-        <View>
+        <View style={styles.container}>
           <View style={styles.header}>
             <Text style={styles.headerText}>REDDIT VIEWER</Text>
           </View>
@@ -82,6 +82,9 @@ export default class PostsIndex extends Component {
   }
 }
 const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'flex-start',
+  },
   header: {
     height: 23,
     alignSelf: 'stretch',

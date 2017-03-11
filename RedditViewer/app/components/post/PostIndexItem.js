@@ -98,10 +98,11 @@ const styles = StyleSheet.create({
   },
   score: {
     fontSize: 16,
+    color: '#5daf26',
   },
   upArrow: {
     height: 16,
-    width: 20,
+    width: 16,
     marginRight: 2,
   },
   author: {

@@ -143,10 +143,11 @@ const styles = StyleSheet.create({
   },
   score: {
     fontSize: 20,
+    color: '#5daf26',
   },
   upArrow: {
     height: 18,
-    width: 24,
+    width: 18,
     marginRight: 2,
   },
   authorSubTime: {
