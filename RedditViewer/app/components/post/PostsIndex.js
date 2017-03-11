@@ -48,7 +48,7 @@ export default class PostsIndex extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     let posts = this.props.posts;
     console.log(posts);
-    const hiddenBar = <StatusBar
+    const hideBar = <StatusBar
                          backgroundColor="blue"
                          barStyle="light-content"
                          hidden={true}
@@ -56,7 +56,7 @@ export default class PostsIndex extends Component {
     if (posts instanceof Array) {
       return (
         <View style={styles.container}>
-          {hiddenBar}
+          {hideBar}
           <View style={styles.header}>
             <Text style={styles.headerText}>REDDIT VIEWER</Text>
           </View>
@@ -67,6 +67,7 @@ export default class PostsIndex extends Component {
               <RefreshControl
                 refreshing={this.state.refreshing}
                 onRefresh={this._onRefresh.bind(this)}
+                colors={["#5daf26"]}
               />
             }
           />
@@ -75,8 +76,10 @@ export default class PostsIndex extends Component {
     } else {
       return (
         <View style={styles.loading}>
-        {hiddenBar}
-        <Text style={styles.loadingMessage}>FETCHING TOP POSTS...</Text>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>LOADING REDDIT VIEWER...</Text>
+        </View>
+        {hideBar}
           <ActivityIndicator
               animating={this.state.loading}
               color="#5daf26"
@@ -94,7 +97,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   header: {
-    height: 23,
     alignSelf: 'stretch',
     justifyContent: 'center',
     alignItems: 'center',
@@ -102,10 +104,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderBottomWidth: 1,
     borderColor: '#dbdbdb',
+    padding: 10,
   },
   headerText: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 20,
     color: '#5daf26',
   },
   loading: {
