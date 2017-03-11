@@ -12,34 +12,33 @@ export default class PostDetail extends Component {
   constructor(props) {
     super(props);
     this.createIndexScene = this.createIndexScene.bind(this);
-    this.timeDifference = this.timeDifference.bind(this);
+    this.elapsedTime = this.elapsedTime.bind(this);
   }
 
   createIndexScene() {
     this.props.navigator.pop();
   }
-
-  timeDifference(previous, current) {
-
-    const msPerMinute = 60 * 1000;
-    const msPerHour = msPerMinute * 60;
-    const msPerDay = msPerHour * 24;
+  elapsedTime(previousTime, current) {
+    const previous = previousTime * 1000;
+    const msPerMin = 60 * 1000;
+    const msPerHr = msPerMin * 60;
+    const msPerDay = msPerHr * 24;
     const msPerMonth = msPerDay * 30;
-    const msPerYear = msPerDay * 365;
-    const elapsed = (current - previous) / 100000;
+    const msPerYr = msPerDay * 365;
+    const elapsed = (current - previous);
 
-    if (elapsed < msPerMinute) {
+    if (elapsed < msPerMin) {
          return 'about ' + Math.round(elapsed/1000) + ' seconds ago';
-    } else if (elapsed < msPerHour) {
-         return 'about ' + Math.round(elapsed/msPerMinute) + ' minutes ago';
+    } else if (elapsed < msPerHr) {
+         return 'about ' + Math.round(elapsed/msPerMin) + ' minutes ago';
     } else if (elapsed < msPerDay ) {
-         return 'about ' + Math.round(elapsed/msPerHour ) + ' hours ago';
+         return 'about ' + Math.round(elapsed/msPerHr ) + ' hours ago';
     } else if (elapsed < msPerMonth) {
         return 'about ' + Math.round(elapsed/msPerDay) + ' days ago';
-    } else if (elapsed < msPerYear) {
+    } else if (elapsed < msPerYr) {
         return 'about ' + Math.round(elapsed/msPerMonth) + ' months ago';
     } else {
-        return 'about ' + Math.round(elapsed/msPerYear ) + ' years ago';
+        return 'about ' + Math.round(elapsed/msPerYr ) + ' years ago';
     }
 }
 
@@ -50,11 +49,18 @@ export default class PostDetail extends Component {
     const domain = post.domain;
     const subreddit = post.subreddit_name_prefixed;
     const title = post.title;
-    const currentTime = new Date().getTime();
-    const timeDiff = this.timeDifference(post.created, currentTime);
+    const currentTime = Date.now();
+    const timeDiff = this.elapsedTime(post.created_utc, currentTime);
+
     let img;
-    if (post.thumbnail !== "default") {
-      let uriObj = {uri: post.thumbnail};
+    let uriObj;
+    const url = post.url;
+    if (url.slice(url.length - 4, url.length) === ".gif") {
+      let uriObj = {uri: url};
+      img = <Image source={uriObj} style={styles.thumbnail}/>
+    }
+    else if (post.thumbnail !== "default") {
+      uriObj = {uri: post.thumbnail};
       img = (<Image source={uriObj} style={styles.thumbnail}/>)
     } else {
       img = (<Image
@@ -98,6 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   header: {
+    height: 70,
     flexDirection: 'row',
     padding: 10,
     alignItems: 'center',
