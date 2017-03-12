@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  requestPosts: () => dispatch(requestPosts()),
+  requestPosts: (route) => dispatch(requestPosts(route)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsIndex);

@@ -1,7 +1,7 @@
-const REQUEST_URL = 'https://www.reddit.com/.json';
+const BASE_URL = 'https://www.reddit.com/';
 
-export const fetchPosts = () => (
-  fetch(REQUEST_URL, {
+export const fetchPosts = (route) => (
+  fetch(BASE_URL + route + '/.json', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
