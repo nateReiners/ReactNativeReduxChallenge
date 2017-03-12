@@ -50,6 +50,7 @@ export default class PostDetail extends Component {
     const author = post.author;
     const domain = post.domain;
     const subreddit = post.subreddit_name_prefixed;
+    const numComments = post.num_comments;
     const title = `${post.title} (${domain})`;
     const currentTime = Date.now();
     const timeDiff = this.elapsedTime(post.created_utc, currentTime);
@@ -85,7 +86,7 @@ export default class PostDetail extends Component {
 
         <ScrollView contentContainerStyle={styles.postIndexItem}>
           <View style={{flex: 1}}>
-            <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{title}</Text>
             <View style={styles.scoreView}>
               <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
               <Text style={styles.score}>{score}</Text>
@@ -93,11 +94,11 @@ export default class PostDetail extends Component {
             {img}
 
             <View style={styles.postText}>
+              <Text style={styles.authorSubTime}>{numComments} comments</Text>
               <Text style={styles.authorSubTime}>
                 Posted by {author} to {subreddit} {timeDiff}
               </Text>
             </View>
-
           </View>
         </ScrollView>
 
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
   },
   postText: {
     padding: 10,
-    paddingBottom: 100,
+    paddingBottom: 80,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     color: 'black',
     textAlign: 'center',
-    padding: 10,
+    padding: 5,
   },
   scoreView: {
     flexDirection: 'row',
@@ -186,7 +187,7 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     alignSelf: 'center',
-    margin: 20,
+    margin: 10,
     height: 250,
     width: 250,
   },

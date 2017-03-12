@@ -32,17 +32,17 @@ export default class PostIndexItem extends Component {
     const elapsed = (current - previous);
 
     if (elapsed < msPerMin) {
-         return 'about ' + Math.round(elapsed/1000) + ' seconds ago';
+         return Math.round(elapsed/1000) + ' seconds ago';
     } else if (elapsed < msPerHr) {
-         return 'about ' + Math.round(elapsed/msPerMin) + ' minutes ago';
+         return Math.round(elapsed/msPerMin) + ' minutes ago';
     } else if (elapsed < msPerDay ) {
-         return 'about ' + Math.round(elapsed/msPerHr ) + ' hours ago';
+         return Math.round(elapsed/msPerHr ) + ' hours ago';
     } else if (elapsed < msPerMonth) {
-        return 'about ' + Math.round(elapsed/msPerDay) + ' days ago';
+        return Math.round(elapsed/msPerDay) + ' days ago';
     } else if (elapsed < msPerYr) {
-        return 'about ' + Math.round(elapsed/msPerMonth) + ' months ago';
+        return Math.round(elapsed/msPerMonth) + ' months ago';
     } else {
-        return 'about ' + Math.round(elapsed/msPerYr ) + ' years ago';
+        return Math.round(elapsed/msPerYr ) + ' years ago';
     }
   }
 
@@ -63,6 +63,7 @@ export default class PostIndexItem extends Component {
     const author = post.data.author;
     const domain = post.data.domain;
     const subreddit = post.data.subreddit_name_prefixed;
+    const numComments = post.data.num_comments;
     const currentTime = Date.now();
     const timeDiff = this.elapsedTime(post.data.created_utc, currentTime);
     let title = post.data.title;
@@ -73,7 +74,7 @@ export default class PostIndexItem extends Component {
       title = `${post.data.title}... (${domain})`
     }
 
-    return(
+    return (
       <TouchableOpacity onPress={() => this.createDetailScene(post)}>
         <View style={styles.postIndexItem}>
           {img}
@@ -83,8 +84,9 @@ export default class PostIndexItem extends Component {
               <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
               <Text style={styles.score}>{post.data.score}</Text>
             </View>
-            <Text style={styles.author}>Posted to {subreddit} {timeDiff}</Text>
-            <Text style={styles.author}>by {author}</Text>
+            <Text>{numComments} comments</Text>
+            <Text style={styles.author}>{subreddit}</Text>
+            <Text style={styles.author}>{timeDiff} by {author}</Text>
           </View>
         </View>
       </TouchableOpacity>

@@ -2,6 +2,8 @@
 
 Reddit Viewer is a cross-platform React Native App for Android and iOS that fetches posts from the front page of reddit and displays information about each post. Clicking a post takes the user to a 'Post Details' page which shows the same basic information, plus time since posting.
 
+![Screenshots](./RedditViewer/app/images/screenshots.png)
+
 ##TECHNOLOGIES
 
 - React Native
