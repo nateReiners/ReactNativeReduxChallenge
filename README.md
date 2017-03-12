@@ -15,7 +15,7 @@ Reddit Viewer is a cross-platform React Native App for Android and iOS that fetc
 - Navigate to RedditViewer in terminal and run `npm install`
 - (Android Studio) 
     - Open the RedditViewer folder with Android Studio.
-    - Check the event log. If prompted, __*Add Root*__ and also __Configure__ your Android framework.
+    - Check the event log. If prompted, __Add Root__ and also __Configure__ your Android framework.
     - Start an emulator.
 - (XCode) 
     - In your terminal enter `react-native run-ios`.
