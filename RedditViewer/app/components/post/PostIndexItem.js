@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-class PostIndexItem extends Component {
+export default class PostIndexItem extends Component {
   constructor(props) {
     super(props);
     this.createDetailScene = this.createDetailScene.bind(this);
@@ -44,12 +44,12 @@ class PostIndexItem extends Component {
     } else {
         return 'about ' + Math.round(elapsed/msPerYr ) + ' years ago';
     }
-}
+  }
 
   render() {
-    let post = this.props.post;
-
+    const post = this.props.post;
     let img;
+
     if (post.data.thumbnail !== "default") {
       let uriObj = {uri: post.data.thumbnail};
       img = (<Image source={uriObj} style={styles.thumbnail}/>)
@@ -65,8 +65,8 @@ class PostIndexItem extends Component {
     const subreddit = post.data.subreddit_name_prefixed;
     const currentTime = Date.now();
     const timeDiff = this.elapsedTime(post.data.created_utc, currentTime);
-
     let title = post.data.title;
+
     if (title.length > 50) {
       title = `${post.data.title.slice(0, 50)}... (${domain})`;
     } else {
@@ -78,13 +78,13 @@ class PostIndexItem extends Component {
         <View style={styles.postIndexItem}>
           {img}
           <View style={styles.postText}>
-              <Text style={styles.title}>{title}</Text>
-              <View style={styles.scoreView}>
-                <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
-                <Text style={styles.score}>{post.data.score}</Text>
-              </View>
-              <Text style={styles.author}>Posted to {subreddit} {timeDiff}</Text>
-              <Text style={styles.author}>by {author}</Text>
+            <Text style={styles.title}>{title}</Text>
+            <View style={styles.scoreView}>
+              <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
+              <Text style={styles.score}>{post.data.score}</Text>
+            </View>
+            <Text style={styles.author}>Posted to {subreddit} {timeDiff}</Text>
+            <Text style={styles.author}>by {author}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -92,7 +92,6 @@ class PostIndexItem extends Component {
   }
 }
 
-export default PostIndexItem;
 
 const styles = StyleSheet.create({
   postIndexItem: {

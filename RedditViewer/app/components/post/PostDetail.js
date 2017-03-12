@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   View,
+  ScrollView,
   Text,
   StyleSheet,
   TouchableOpacity,
@@ -41,7 +42,7 @@ export default class PostDetail extends Component {
     } else {
         return 'about ' + Math.round(elapsed/msPerYr ) + ' years ago';
     }
-}
+  }
 
   render() {
     const post = this.props.post.data;
@@ -52,10 +53,10 @@ export default class PostDetail extends Component {
     const title = `${post.title} (${domain})`;
     const currentTime = Date.now();
     const timeDiff = this.elapsedTime(post.created_utc, currentTime);
-
-    let img;
-    let uriObj;
     const url = post.url;
+    let uriObj;
+    let img;
+
     if (url.slice(url.length - 4, url.length) === ".gif") {
       let uriObj = {uri: url};
       img = <Image source={uriObj} style={styles.thumbnail}/>
@@ -68,30 +69,50 @@ export default class PostDetail extends Component {
         source={require("../../images/defaultThumb.png")}
         style={styles.thumbnail}/>)
     }
+
     return (
       <View style={styles.container}>
+
         <View style={styles.header}>
           <TouchableOpacity style={styles.button} onPress={this.createIndexScene}>
-          <Image
-            style={styles.backArrow}
-            source={require('../../images/leftArrow.png')}
-          />
+            <Image
+              style={styles.backArrow}
+              source={require('../../images/leftArrow.png')}
+            />
           </TouchableOpacity>
           <Text style={styles.headerText}>POST DETAILS</Text>
         </View>
-        <View style={styles.postIndexItem}>
-          <Text style={styles.title}>{title}</Text>
-          <View style={styles.scoreView}>
-            <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
-            <Text style={styles.score}>{score}</Text>
-          </View>
-          {img}
-          <View style={styles.postText}>
+
+        <ScrollView contentContainerStyle={styles.postIndexItem}>
+          <View style={{flex: 1}}>
+            <Text style={styles.title}>{title}</Text>
+            <View style={styles.scoreView}>
+              <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
+              <Text style={styles.score}>{score}</Text>
+            </View>
+            {img}
+
+            <View style={styles.postText}>
               <Text style={styles.authorSubTime}>
                 Posted by {author} to {subreddit} {timeDiff}
+                jfkdlafjdska;fjadkl; fkdjak; fjdaklf ;jda flksadjf kljfdsklafjdkslfjdkslfjdklsjfkdalfjdsla;jfkdlafjdskajfdkslfjdslfds
+                fdskjfkldjfldsjfkldsajfdajfk;djskfljakl fjdljfal
+                fdksjfadlsajfd
+                fdksajfkldsjaflsd
+                fdksjflkjds
+                dkfjdsklfds
+                fkjdklsfjds
+                fdksjfdlskjflds
+                fdkfjdklsj;jadkljfkasdljfkdsljfkdljf kdsljf asdlkfjdskaljfdlsa;f djkl
+                fdkslajfl dasjfd salfjd af
+                sakfjdsaklfdsjafkl das
+                fdksajf dksal
               </Text>
+            </View>
+
           </View>
-        </View>
+        </ScrollView>
+
       </View>
     );
   }
@@ -108,8 +129,8 @@ const styles = StyleSheet.create({
     height: 60,
     flexDirection: 'row',
     padding: 6,
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 15,
+    paddingRight: 15,
     alignItems: 'center',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
@@ -144,7 +165,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   postText: {
-    paddingLeft: 15,
+    padding: 10,
+    paddingBottom: 100,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -152,9 +174,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     flexDirection: 'column',
-    flexWrap: 'wrap',
     color: 'black',
     textAlign: 'center',
+    padding: 10,
   },
   scoreView: {
     flexDirection: 'row',
