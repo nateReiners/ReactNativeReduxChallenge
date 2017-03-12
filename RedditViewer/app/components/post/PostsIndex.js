@@ -83,6 +83,7 @@ export default class PostsIndex extends Component {
     });
 
     const posts = this.props.posts[this.state.currentTab];
+    console.log(posts);
     const hideBar = <StatusBar hidden={true}/>;
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const dataSource = ds.cloneWithRows(posts);
@@ -150,7 +151,6 @@ const styles = StyleSheet.create({
   tabText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'white',
     color: '#5daf26',
   },
   selectedTabText: {
@@ -171,8 +171,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 16,
     paddingRight: 16,
-    borderBottomWidth: 3,
-    borderColor: '#5daf26',
+    borderBottomWidth: 2,
+    borderColor: '#38751e',
   },
   header: {
     flexDirection: 'row',
