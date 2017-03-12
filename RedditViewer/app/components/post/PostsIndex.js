@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     height: 40,
-    backgroundColor: 'white',
     borderBottomWidth: 1,
     borderColor: '#5daf26',
   },
@@ -179,7 +178,6 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white',
     padding: 4,
   },
   headerText: {
