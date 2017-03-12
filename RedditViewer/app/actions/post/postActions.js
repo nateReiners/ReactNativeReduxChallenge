@@ -9,7 +9,6 @@ export const receivePosts = posts => ({
 });
 
 export const requestPosts = (route) => dispatch => {
-  console.log("requestPosts Action Hit");
   return postAPI.fetchPosts(route)
   .then((responsePosts) => {
       dispatch(receivePosts(responsePosts));

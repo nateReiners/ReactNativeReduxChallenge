@@ -18,6 +18,7 @@ export default class PostDetail extends Component {
   createIndexScene() {
     this.props.navigator.pop();
   }
+
   elapsedTime(previousTime, current) {
     const previous = previousTime * 1000;
     const msPerMin = 60 * 1000;
