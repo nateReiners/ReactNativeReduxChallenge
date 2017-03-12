@@ -95,18 +95,6 @@ export default class PostDetail extends Component {
             <View style={styles.postText}>
               <Text style={styles.authorSubTime}>
                 Posted by {author} to {subreddit} {timeDiff}
-                jfkdlafjdska;fjadkl; fkdjak; fjdaklf ;jda flksadjf kljfdsklafjdkslfjdkslfjdklsjfkdalfjdsla;jfkdlafjdskajfdkslfjdslfds
-                fdskjfkldjfldsjfkldsajfdajfk;djskfljakl fjdljfal
-                fdksjfadlsajfd
-                fdksajfkldsjaflsd
-                fdksjflkjds
-                dkfjdsklfds
-                fkjdklsfjds
-                fdksjfdlskjflds
-                fdkfjdklsj;jadkljfkasdljfkdsljfkdljf kdsljf asdlkfjdskaljfdlsa;f djkl
-                fdkslajfl dasjfd salfjd af
-                sakfjdsaklfdsjafkl das
-                fdksajf dksal
               </Text>
             </View>
 
