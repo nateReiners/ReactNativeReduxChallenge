@@ -13,7 +13,10 @@ Reddit Viewer is a cross-platform React Native App for Android and iOS that fetc
 [setup instructions](https://facebook.github.io/react-native/docs/getting-started.html) provided by our friends at Facebook.
 - Clone this repo to your machine
 - Navigate to RedditViewer in terminal and run `npm install`
-- (Android) Open the RedditViewer folder in Android Studio and start an emulator
-    - Check the event log. If prompted, Add _Root_ and also _Configure_ your Android framework.
-- In your terminal, enter `react-native run-android` or `react-native run-ios` respectively
-- NOTE: If the emulator's time drifts more than a minute, you may have to reset it as I'm calculating time since posting using Date.now() upon loading the PostDetail component
+- (Android Studio) 
+    - Open the RedditViewer folder with Android Studio.
+    - Check the event log. If prompted, Add __Root__ and also __Configure__ your Android framework.
+    - Start an emulator.
+- (XCode) 
+    - In your terminal enter `react-native run-ios`.
+- NOTE: If the emulator's time drifts more than a minute, change the emulators time to the current time using the emulator's UI should fix that. I'm using Date.now() upon loading the PostDetail component so the detail view will be unavailable if you 
