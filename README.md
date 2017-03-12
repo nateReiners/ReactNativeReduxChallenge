@@ -9,7 +9,7 @@ Reddit Viewer is a cross-platform React Native App for Android and iOS that fetc
 
 ##TESTING INSTRUCTIONS
 
-- Make sure you've followed the
+- Make sure you've followed the React Native 
 [setup instructions](https://facebook.github.io/react-native/docs/getting-started.html) provided by our friends at Facebook.
 - Clone this repo to your machine
 - Navigate to RedditViewer in terminal and run `npm install`
