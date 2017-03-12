@@ -1,10 +1,19 @@
 const RECEIVE_POSTS = "RECEIVE POSTS";
+import { merge } from 'lodash';
 
-const postsReducer = (state = {}, action) => {
+const defaultState = {
+    hot: [],
+    new: [],
+    rising: [],
+    controversial: [],
+    top: [],
+};
+const postsReducer = (state = defaultState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_POSTS:
-      return action.posts;
+      const newState = merge({}, state, {[action.routeName]: action.posts});
+      return newState;
     default:
       return state;
   }
