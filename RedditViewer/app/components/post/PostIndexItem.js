@@ -22,6 +22,30 @@ class PostIndexItem extends Component {
     });
   }
 
+  elapsedTime(previousTime, current) {
+    const previous = previousTime * 1000;
+    const msPerMin = 60 * 1000;
+    const msPerHr = msPerMin * 60;
+    const msPerDay = msPerHr * 24;
+    const msPerMonth = msPerDay * 30;
+    const msPerYr = msPerDay * 365;
+    const elapsed = (current - previous);
+
+    if (elapsed < msPerMin) {
+         return 'about ' + Math.round(elapsed/1000) + ' seconds ago';
+    } else if (elapsed < msPerHr) {
+         return 'about ' + Math.round(elapsed/msPerMin) + ' minutes ago';
+    } else if (elapsed < msPerDay ) {
+         return 'about ' + Math.round(elapsed/msPerHr ) + ' hours ago';
+    } else if (elapsed < msPerMonth) {
+        return 'about ' + Math.round(elapsed/msPerDay) + ' days ago';
+    } else if (elapsed < msPerYr) {
+        return 'about ' + Math.round(elapsed/msPerMonth) + ' months ago';
+    } else {
+        return 'about ' + Math.round(elapsed/msPerYr ) + ' years ago';
+    }
+}
+
   render() {
     let post = this.props.post;
 
@@ -39,6 +63,8 @@ class PostIndexItem extends Component {
     const author = post.data.author;
     const domain = post.data.domain;
     const subreddit = post.data.subreddit_name_prefixed;
+    const currentTime = Date.now();
+    const timeDiff = this.elapsedTime(post.data.created_utc, currentTime);
 
     let title = post.data.title;
     if (title.length > 50) {
@@ -46,7 +72,6 @@ class PostIndexItem extends Component {
     } else {
       title = `${post.data.title}... (${domain})`
     }
-
 
     return(
       <TouchableOpacity onPress={() => this.createDetailScene(post)}>
@@ -58,8 +83,8 @@ class PostIndexItem extends Component {
                 <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
                 <Text style={styles.score}>{post.data.score}</Text>
               </View>
+              <Text style={styles.author}>Posted to {subreddit} {timeDiff}</Text>
               <Text style={styles.author}>by {author}</Text>
-              <Text style={styles.author}>in {subreddit}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -76,8 +101,8 @@ const styles = StyleSheet.create({
     marginRight: 20,
     paddingTop: 8,
     paddingBottom: 10,
-    borderBottomWidth: 2,
-    borderColor: '#dbdbdb',
+    borderBottomWidth: 1,
+    borderColor: '#5daf26',
   },
   postText: {
     paddingLeft: 15,
@@ -86,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     flexDirection: 'column',
     flexWrap: 'wrap',
     paddingBottom: 5,

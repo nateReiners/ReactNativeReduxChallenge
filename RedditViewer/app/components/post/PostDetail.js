@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight,
+  TouchableOpacity,
   Image,
 } from 'react-native';
 
@@ -18,6 +18,7 @@ export default class PostDetail extends Component {
   createIndexScene() {
     this.props.navigator.pop();
   }
+
   elapsedTime(previousTime, current) {
     const previous = previousTime * 1000;
     const msPerMin = 60 * 1000;
@@ -48,7 +49,7 @@ export default class PostDetail extends Component {
     const author = post.author;
     const domain = post.domain;
     const subreddit = post.subreddit_name_prefixed;
-    const title = post.title;
+    const title = `${post.title} (${domain})`;
     const currentTime = Date.now();
     const timeDiff = this.elapsedTime(post.created_utc, currentTime);
 
@@ -70,12 +71,12 @@ export default class PostDetail extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableHighlight style={styles.button} onPress={this.createIndexScene}>
+          <TouchableOpacity style={styles.button} onPress={this.createIndexScene}>
           <Image
             style={styles.backArrow}
             source={require('../../images/leftArrow.png')}
           />
-          </TouchableHighlight>
+          </TouchableOpacity>
           <Text style={styles.headerText}>POST DETAILS</Text>
         </View>
         <View style={styles.postIndexItem}>
@@ -104,25 +105,27 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   header: {
-    height: 70,
+    height: 60,
     flexDirection: 'row',
-    padding: 10,
+    padding: 6,
+    paddingLeft: 20,
+    paddingRight: 20,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     borderBottomWidth: 1,
     borderColor: '#dbdbdb',
   },
   button: {
     backgroundColor: '#5daf26',
-    padding: 8,
     width: 100,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+    alignSelf: 'stretch'
   },
   backArrow: {
-    height: 24,
-    width: 30,
+    height: 22,
+    width: 26,
   },
   headerText: {
     flex: 1,
