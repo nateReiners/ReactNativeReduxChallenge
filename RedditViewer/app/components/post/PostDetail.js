@@ -48,17 +48,16 @@ export default class PostDetail extends Component {
 
   render() {
     const post = this.props.post.data;
-    console.log(post);
     const score = post.score;
     const author = post.author;
     const domain = post.domain;
     const subreddit = post.subreddit_name_prefixed;
     const numComments = post.num_comments;
-
     const title = `${post.title} (${domain})`;
     const currentTime = Date.now();
     const timeDiff = this.elapsedTime(post.created_utc, currentTime);
     const url = post.url;
+
     let uriObj;
     let img;
     let loadingText = <Text></Text>;
@@ -99,9 +98,9 @@ export default class PostDetail extends Component {
             {img}
 
             <Text style={styles.link} onPress={() => Linking.openURL(
-              `https://www.reddit.com/${post.url}`)}>
+                `https://www.reddit.com/${post.url}`)}>
               View on Reddit
-              </Text>
+            </Text>
             <View style={styles.postText}>
               <Text style={styles.authorSubTime}>{numComments} comments</Text>
               <Text style={styles.authorSubTime}>
@@ -179,6 +178,7 @@ const styles = StyleSheet.create({
     color: 'blue',
     textDecorationLine: 'underline',
     textAlign: 'center',
+    fontSize: 16,
   },
   scoreView: {
     flexDirection: 'row',
