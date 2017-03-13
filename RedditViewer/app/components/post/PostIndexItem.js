@@ -84,7 +84,7 @@ export default class PostIndexItem extends Component {
               <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
               <Text style={styles.score}>{post.data.score}</Text>
             </View>
-            <Text>{numComments} comments</Text>
+            <Text style={styles.author}>{numComments} comments</Text>
             <Text style={styles.author}>{subreddit}</Text>
             <Text style={styles.author}>{timeDiff} by {author}</Text>
           </View>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 8,
-    paddingBottom: 10,
+    paddingBottom: 6,
     borderBottomWidth: 1.5,
     borderColor: '#5daf26',
     backgroundColor: '#f9f9f9',
@@ -115,8 +115,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     flexDirection: 'column',
-    flexWrap: 'wrap',
-    paddingBottom: 5,
     color: 'black',
   },
   scoreView: {
