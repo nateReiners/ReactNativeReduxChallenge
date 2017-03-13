@@ -55,8 +55,8 @@ export default class PostIndexItem extends Component {
       img = (<Image source={uriObj} style={styles.thumbnail}/>)
     } else {
       img = (<Image
-        source={require("../../images/defaultThumb.png")}
-        style={styles.thumbnail}/>)
+               source={require("../../images/defaultThumb.png")}
+               style={styles.thumbnail}/>)
     }
 
     const score = post.data.score;

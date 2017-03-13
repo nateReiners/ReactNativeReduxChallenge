@@ -1,6 +1,6 @@
 # REDDIT VIEWER
 
-Reddit Viewer is a cross-platform React Native App for Android and iOS that fetches posts from the front page of Reddit and displays information about each post. Tabs allow the user to fetch posts from hot, new, rising, controversial and top. Clicking a post takes the user to a 'Post Details' page which shows the same basic information.
+Reddit Viewer is a cross-platform React Native App for Android and iOS that fetches posts from Reddit and displays information about each post. Tabs allow the user to fetch posts from hot, new, rising, controversial and top. Clicking a post takes the user to a 'Post Details' page which shows basic information about the post.
 
 ![IndexScene](./RedditViewer/app/images/postIndex.png) ![DetailScene](./RedditViewer/app/images/postDetails.png)
 
@@ -28,3 +28,7 @@ Reddit Viewer is a cross-platform React Native App for Android and iOS that fetc
 
 - React Native
 - Redux
+
+##FUTURE DIRECTION
+
+Currently this app only displays a thumbnail on the post details page. I also added support for gif playback on Android, but loading is slow. Eventually I'd like to improve the details page to handle virtually all types of media so that things like video and articles display properly. 
