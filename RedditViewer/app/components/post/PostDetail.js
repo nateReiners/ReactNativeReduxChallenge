@@ -57,10 +57,12 @@ export default class PostDetail extends Component {
     const url = post.url;
     let uriObj;
     let img;
+    let loadingText = <Text></Text>;
 
     if (url.slice(url.length - 4, url.length) === ".gif") {
       let uriObj = {uri: url};
       img = <Image source={uriObj} style={styles.thumbnail}/>
+      loadingText = <Text>Loading gif animation... be patient</Text>;
     }
     else if (post.thumbnail !== "default") {
       uriObj = {uri: post.thumbnail};

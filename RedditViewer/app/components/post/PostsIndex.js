@@ -22,6 +22,7 @@ export default class PostsIndex extends Component {
     super(props);
     this.state = {
       refreshing: false,
+      loadging: false,
       currentTab: 'hot',
      };
     this.renderRow = this.renderRow.bind(this);
@@ -32,6 +33,7 @@ export default class PostsIndex extends Component {
 
 
   componentDidMount() {
+    this.setState({loading: true});
     this.getData();
   }
 
@@ -51,15 +53,8 @@ export default class PostsIndex extends Component {
     this.setState({ refreshing: true });
     this.props.requestPosts(tab || this.state.currentTab).then(
       (res) => {
-        this.setState({ refreshing: false });
+        this.setState({ refreshing: false, loading: false});
       }
-    );
-  }
-
-
-  renderRow(post) {
-    return (
-      <PostIndexItem post={post} navigator={this.props.navigator}/>
     );
   }
 
@@ -70,6 +65,11 @@ export default class PostsIndex extends Component {
     }
   }
 
+  renderRow(post) {
+    return (
+      <PostIndexItem post={post} navigator={this.props.navigator}/>
+    );
+  }
 
   render () {
     const tabNames = ['hot', 'new', 'rising', 'controversial', 'top'];
@@ -87,11 +87,7 @@ export default class PostsIndex extends Component {
     const hideBar = <StatusBar hidden={true}/>;
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const dataSource = ds.cloneWithRows(posts);
-    let index;
-    if (posts.length < 0) {
-      index = <View></View>
-    } else {
-      index =
+    let index =
         <ListView
           dataSource={dataSource}
           renderRow={this.renderRow}
@@ -101,8 +97,7 @@ export default class PostsIndex extends Component {
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh}
               colors={["#5daf26"]}/>
-          }/>
-    }
+          }/>;
 
     const tabNav =
       <View style={styles.tabs}>
@@ -123,9 +118,14 @@ export default class PostsIndex extends Component {
         </TouchableOpacity>
       </View>;
 
-
       return (
         <View>
+          <ActivityIndicator
+            animating={this.state.refreshing}
+            style={styles.activityIndicator}
+            color={'#5daf26'}
+            size="large"
+          />
           {hideBar}
           <View style={styles.header}>
             <Text style={styles.headerText}>REDDIT VIEWER</Text>
@@ -144,8 +144,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     height: 40,
-    borderBottomWidth: 1,
-    borderColor: '#5daf26',
   },
   tabText: {
     fontSize: 16,
@@ -164,13 +162,18 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
   },
+  activityIndicator: {
+    height: 0,
+    alignSelf: 'stretch',
+    top: 122,
+  },
   selectedTabLink: {
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 16,
     paddingRight: 16,
-    borderBottomWidth: 2,
+    borderBottomWidth: 3,
     borderColor: '#38751e',
   },
   header: {
