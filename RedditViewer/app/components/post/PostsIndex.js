@@ -7,8 +7,7 @@ import {
   ListView,
   RefreshControl,
   ActivityIndicator,
-  StatusBar,
-  TouchableHighlight,
+  Platform,
   TouchableOpacity,
 } from 'react-native';
 import _, { isEqual }  from 'lodash';
@@ -83,7 +82,6 @@ export default class PostsIndex extends Component {
     });
 
     const posts = this.props.posts[this.state.currentTab];
-    const hideBar = <StatusBar hidden={true}/>;
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const dataSource = ds.cloneWithRows(posts);
 
@@ -133,7 +131,6 @@ export default class PostsIndex extends Component {
       return (
         <View>
           {activityIndicator}
-          {hideBar}
           <View style={styles.header}>
             <Text style={styles.headerText}>REDDIT VIEWER</Text>
             <Text style={styles.headerText}>/{this.state.currentTab}</Text>
@@ -191,6 +188,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 4,
     backgroundColor: '#f9f9f9',
+    marginTop: (Platform.OS === 'ios') ? 17 : 0,
   },
   headerText: {
     textAlign: 'center',

@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 15,
     borderBottomWidth: 1,
-    borderColor: '#5daf26',
+    borderColor: '#e0e0e0',
     backgroundColor: '#f9f9f9',
   },
   postText: {
