@@ -98,12 +98,13 @@ export default class PostIndexItem extends Component {
 const styles = StyleSheet.create({
   postIndexItem: {
     flexDirection: 'row',
-    marginLeft: 20,
-    marginRight: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
     paddingTop: 8,
     paddingBottom: 10,
-    borderBottomWidth: 1,
+    borderBottomWidth: 1.5,
     borderColor: '#5daf26',
+    backgroundColor: '#f9f9f9',
   },
   postText: {
     paddingLeft: 15,
