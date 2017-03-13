@@ -5,6 +5,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Platform,
   Image,
 } from 'react-native';
 
@@ -115,13 +116,12 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    marginTop: (Platform.OS === 'ios') ? 20 : 0,
   },
   header: {
     height: 60,
     flexDirection: 'row',
-    padding: 6,
-    paddingLeft: 15,
-    paddingRight: 15,
+    padding: 12,
     alignItems: 'center',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
@@ -129,15 +129,15 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#5daf26',
-    width: 100,
+    width: 90,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
     alignSelf: 'stretch'
   },
   backArrow: {
-    height: 22,
-    width: 26,
+    height: 16,
+    width: 18,
   },
   headerText: {
     flex: 1,
