@@ -85,31 +85,37 @@ export default class PostDetail extends Component {
               source={require('../../images/leftArrow.png')}
             />
           </TouchableOpacity>
-          <Text style={styles.headerText}>POST DETAILS</Text>
+          <Text style={styles.headerText}>
+            POST DETAILS
+          </Text>
         </View>
 
         <ScrollView contentContainerStyle={styles.postIndexItem}>
           <View style={{flex: 1}}>
-          <Text style={styles.title}>{title}</Text>
+            <Text style={styles.title}>
+              {title}
+            </Text>
             <View style={styles.scoreView}>
               <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
-              <Text style={styles.score}>{score}</Text>
+              <Text style={styles.score}>
+                {score}
+              </Text>
             </View>
             {img}
-
             <Text style={styles.link} onPress={() => Linking.openURL(
                 `https://www.reddit.com/${post.url}`)}>
               View on Reddit
             </Text>
             <View style={styles.postText}>
-              <Text style={styles.authorSubTime}>{numComments} comments</Text>
+              <Text style={styles.authorSubTime}>
+                {numComments} comments
+              </Text>
               <Text style={styles.authorSubTime}>
                 Posted by {author} to {subreddit} {timeDiff}
               </Text>
             </View>
           </View>
         </ScrollView>
-
       </View>
     );
   }

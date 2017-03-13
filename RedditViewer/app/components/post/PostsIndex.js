@@ -106,42 +106,47 @@ export default class PostsIndex extends Component {
 
     const index =
       <ListView
-      dataSource={dataSource}
-      renderRow={this.renderRow}
-      enableEmptySections={true}
-      refreshControl={
-        <RefreshControl
-        refreshing={this.state.refreshing}
-        onRefresh={this._onRefresh}
-        colors={['#5daf26', '#38751e']}/>
+        dataSource={dataSource}
+        renderRow={this.renderRow}
+        enableEmptySections={true}
+        refreshControl={
+          <RefreshControl
+          refreshing={this.state.refreshing}
+          onRefresh={this._onRefresh}
+          colors={['#5daf26', '#38751e']}/>
       }/>;
 
     let activityIndicator;
+
      if (posts.length === 0) {
        activityIndicator = <ActivityIndicator
-         animating={this.state.loading}
-         style={styles.activityIndicator}
-         color={'#5daf26'}
-         size="large"
-       />;
+                             animating={this.state.loading}
+                             style={styles.activityIndicator}
+                             color={'#5daf26'}
+                             size="large"
+                           />;
      } else {
-       activityIndicator = <View></View>
+       activityIndicator = <View></View>;
      }
 
       return (
         <View>
           {activityIndicator}
           <View style={styles.header}>
-            <Text style={styles.headerText}>REDDIT VIEWER</Text>
-            <Text style={styles.headerText}>/{this.state.currentTab}</Text>
+            <Text style={styles.headerText}>
+              REDDIT VIEWER
+            </Text>
+            <Text style={styles.headerText}>
+              /{this.state.currentTab}
+            </Text>
           </View>
           {tabNav}
           {index}
        </View>
      );
   }
-
 }
+
 const styles = StyleSheet.create({
   tabs: {
     flexDirection: 'row',
