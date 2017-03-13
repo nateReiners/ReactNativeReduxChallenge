@@ -33,7 +33,6 @@ export default class PostsIndex extends Component {
 
 
   componentDidMount() {
-    this.setState({loading: true});
     this.getData();
   }
 
@@ -119,14 +118,21 @@ export default class PostsIndex extends Component {
         colors={['#5daf26', '#38751e']}/>
       }/>;
 
+    let activityIndicator;
+     if (posts.length === 0) {
+       activityIndicator = <ActivityIndicator
+         animating={this.state.loading}
+         style={styles.activityIndicator}
+         color={'#5daf26'}
+         size="large"
+       />;
+     } else {
+       activityIndicator = <View></View>
+     }
+
       return (
         <View>
-          <ActivityIndicator
-            animating={this.state.loading}
-            style={styles.activityIndicator}
-            color={'#5daf26'}
-            size="large"
-          />
+          {activityIndicator}
           {hideBar}
           <View style={styles.header}>
             <Text style={styles.headerText}>REDDIT VIEWER</Text>
@@ -145,6 +151,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     height: 40,
+    backgroundColor: '#f9f9f9',
   },
   tabText: {
     fontSize: 16,
@@ -175,7 +182,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
     borderBottomWidth: 3,
-    borderColor: '#38751e',
+    borderColor: '#5daf26',
   },
   header: {
     flexDirection: 'row',
