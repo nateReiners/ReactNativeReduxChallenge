@@ -84,21 +84,9 @@ export default class PostsIndex extends Component {
     });
 
     const posts = this.props.posts[this.state.currentTab];
-    console.log(posts);
     const hideBar = <StatusBar hidden={true}/>;
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const dataSource = ds.cloneWithRows(posts);
-    let index =
-        <ListView
-          dataSource={dataSource}
-          renderRow={this.renderRow}
-          enableEmptySections={true}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-              colors={["#5daf26"]}/>
-          }/>;
 
     const tabNav =
       <View style={styles.tabs}>
@@ -118,6 +106,18 @@ export default class PostsIndex extends Component {
           <Text style={tabStyles[tabNames[4]][1]}>{tabNames[4]}</Text>
         </TouchableOpacity>
       </View>;
+
+    const index =
+      <ListView
+      dataSource={dataSource}
+      renderRow={this.renderRow}
+      enableEmptySections={true}
+      refreshControl={
+        <RefreshControl
+        refreshing={this.state.refreshing}
+        onRefresh={this._onRefresh}
+        colors={['#5daf26', '#38751e']}/>
+      }/>;
 
       return (
         <View>
