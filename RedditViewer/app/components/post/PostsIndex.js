@@ -59,8 +59,9 @@ export default class PostsIndex extends Component {
   }
 
   setTab(tab) {
+    const posts = this.props.posts[this.state.currentTab];
     if (tab !== this.state.currentTab) {
-      this.setState({currentTab: tab});
+      this.setState({currentTab: tab, loading: true});
       this.getData(tab);
     }
   }
@@ -121,7 +122,7 @@ export default class PostsIndex extends Component {
       return (
         <View>
           <ActivityIndicator
-            animating={this.state.refreshing}
+            animating={this.state.loading}
             style={styles.activityIndicator}
             color={'#5daf26'}
             size="large"
@@ -182,6 +183,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 4,
+    backgroundColor: '#f9f9f9',
   },
   headerText: {
     textAlign: 'center',
