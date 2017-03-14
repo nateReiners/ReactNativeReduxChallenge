@@ -82,24 +82,30 @@ export default class PostsIndex extends Component {
     });
 
     const posts = this.props.posts[this.state.currentTab];
+    console.log(posts);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const dataSource = ds.cloneWithRows(posts);
 
     const tabNav =
       <View style={styles.tabs}>
-        <TouchableOpacity style={tabStyles[tabNames[0]][0]} onPress={() => this.setTab(tabNames[0])}>
+        <TouchableOpacity style={tabStyles[tabNames[0]][0]}
+                          onPress={() => this.setTab(tabNames[0])}>
           <Text style={tabStyles[tabNames[0]][1]}>{tabNames[0]}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={tabStyles[tabNames[1]][0]} onPress={() => this.setTab(tabNames[1])}>
+        <TouchableOpacity style={tabStyles[tabNames[1]][0]}
+                          onPress={() => this.setTab(tabNames[1])}>
           <Text style={tabStyles[tabNames[1]][1]}>{tabNames[1]}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={tabStyles[tabNames[2]][0]} onPress={() => this.setTab(tabNames[2])}>
+        <TouchableOpacity style={tabStyles[tabNames[2]][0]}
+                          onPress={() => this.setTab(tabNames[2])}>
           <Text style={tabStyles[tabNames[2]][1]}>{tabNames[2]}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={tabStyles[tabNames[3]][0]} onPress={() => this.setTab(tabNames[3])}>
+        <TouchableOpacity style={tabStyles[tabNames[3]][0]}
+                          onPress={() => this.setTab(tabNames[3])}>
           <Text style={tabStyles[tabNames[3]][1]}>{tabNames[3]}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={tabStyles[tabNames[4]][0]} onPress={() => this.setTab(tabNames[4])}>
+        <TouchableOpacity style={tabStyles[tabNames[4]][0]}
+                          onPress={() => this.setTab(tabNames[4])}>
           <Text style={tabStyles[tabNames[4]][1]}>{tabNames[4]}</Text>
         </TouchableOpacity>
       </View>;
@@ -153,7 +159,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     height: 40,
-    backgroundColor: '#f9f9f9',
   },
   tabText: {
     fontSize: 16,
@@ -192,7 +197,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 4,
-    backgroundColor: '#f9f9f9',
     marginTop: (Platform.OS === 'ios') ? 17 : 0,
   },
   headerText: {

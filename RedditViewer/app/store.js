@@ -15,7 +15,7 @@ const configureStore = (preloadedState = {}) => {
     )
   )
 
-  persistStore(store, {storage: AsyncStorage})
+  persistStore(store, {storage: AsyncStorage});
   return store;
 };
 
