@@ -55,8 +55,12 @@ export default class PostDetail extends Component {
   hasHighQualityImage() {
     const url = this.props.post.data.url;
     if ( Platform.OS === 'ios' &&
-         url.slice(url.length - 4, url.length) === ".jpg" ) {
-        return true;
+         url.slice(url.length - 4, url.length) === ".jpg") {
+        if (url.includes("imgur")) {
+          return false;
+        } else {
+          return true;
+        }
     } else if ( url.slice(url.length - 4, url.length) === ".gif" ||
                 url.slice(url.length - 4, url.length) === ".jpg" ) {
       return true;
