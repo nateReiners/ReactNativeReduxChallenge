@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Linking,
   Platform,
+  Dimensions,
   Image,
 } from 'react-native';
 
@@ -14,8 +15,38 @@ import {
 export default class PostDetail extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      width: 0,
+      height: 0,
+      winWidth: 0,
+    };
     this.createIndexScene = this.createIndexScene.bind(this);
     this.elapsedTime = this.elapsedTime.bind(this);
+    this._onLayout = this._onLayout.bind(this);
+    this.setSize = this.setSize.bind(this);
+  }
+
+  componentDidMount() {
+    this.setSize();
+  }
+
+  _onLayout() {
+    this.setSize();
+  }
+
+  setSize() {
+    const url = this.props.post.data.url;
+    const windowSize = Dimensions.get('window');
+    this.setState({winWidth: windowSize.width});
+    Image.getSize(url, (width, height) => {
+      if ((width / height) > (windowSize.width / windowSize.height)) {
+        const imageHeight = (height * windowSize.width) / width;
+        this.setState({width: windowSize.width, height: imageHeight});
+      } else {
+        const imageWidth = (width * windowSize.height ) / height;
+        this.setState({width: imageWidth, height: windowSize.height});
+      }
+    });
   }
 
   createIndexScene() {
@@ -60,12 +91,21 @@ export default class PostDetail extends Component {
 
     let uriObj;
     let img;
-    let loadingText = <Text></Text>;
 
-    if (url.slice(url.length - 4, url.length) === ".gif") {
+    if (url.slice(url.length - 4, url.length) === ".gif" ||
+        url.slice(url.length - 4, url.length) === ".jpg") {
       let uriObj = {uri: url};
-      img = <Image source={uriObj} style={styles.thumbnail}/>
-      loadingText = <Text>Loading gif animation... be patient</Text>;
+
+      img = <View style={{height: (this.state.height),
+                          width: this.state.width,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          backgroundColor: '#5daf26'}}>
+              <Image
+                resizeMode="contain"
+                source={uriObj}
+                style={styles.higherQualityImage}/>
+            </View>;
     }
     else if (post.thumbnail !== "default") {
       uriObj = {uri: post.thumbnail};
@@ -77,7 +117,7 @@ export default class PostDetail extends Component {
     }
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={this._onLayout}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.button} onPress={this.createIndexScene}>
             <Image
@@ -90,8 +130,9 @@ export default class PostDetail extends Component {
           </Text>
         </View>
 
-        <ScrollView contentContainerStyle={styles.postIndexItem}>
-          <View style={{flex: 1}}>
+        <ScrollView contentContainerStyle={[styles.postIndexItem, {width: this.state.winWidth }]}>
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            {img}
             <Text style={styles.title}>
               {title}
             </Text>
@@ -101,7 +142,6 @@ export default class PostDetail extends Component {
                 {score}
               </Text>
             </View>
-            {img}
             <Text style={styles.link} onPress={() => Linking.openURL(
                 `https://www.reddit.com/${post.url}`)}>
               View on Reddit
@@ -130,9 +170,11 @@ const styles = StyleSheet.create({
     marginTop: (Platform.OS === 'ios') ? 20 : 0,
   },
   header: {
-    height: 60,
+    height: 45,
     flexDirection: 'row',
-    padding: 12,
+    padding: 5,
+    paddingLeft: 12,
+    paddingRight: 12,
     alignItems: 'center',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
@@ -161,9 +203,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 20,
-    marginRight: 20,
-    paddingTop: 8,
     paddingBottom: 10,
   },
   postText: {
@@ -209,5 +248,12 @@ const styles = StyleSheet.create({
     margin: 10,
     height: 250,
     width: 250,
+  },
+  higherQualityImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 });

@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
     padding: 15,
     borderBottomWidth: 1,
     borderColor: '#e0e0e0',
-    backgroundColor: '#f9f9f9',
   },
   postText: {
     paddingLeft: 15,
@@ -132,6 +131,7 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     height: 150,
+    width: 150,
     flex: 1,
     borderRightWidth: 1,
     borderColor: 'black',
