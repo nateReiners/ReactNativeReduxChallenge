@@ -140,9 +140,13 @@ export default class PostDetail extends Component {
               source={require('../../images/leftArrow.png')}
             />
           </TouchableOpacity>
-          <Text style={styles.headerText}>
-            POST DETAILS
-          </Text>
+
+          <View style={styles.scoreView}>
+            <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
+            <Text style={styles.score}>
+              {score}
+            </Text>
+          </View>
         </View>
 
         <ScrollView contentContainerStyle={[styles.postIndexItem, {width: this.state.winWidth }]}>
@@ -151,12 +155,7 @@ export default class PostDetail extends Component {
             <Text style={styles.title}>
               {title}
             </Text>
-            <View style={styles.scoreView}>
-              <Image style={styles.upArrow} source={require("../../images/upArrow.png")} />
-              <Text style={styles.score}>
-                {score}
-              </Text>
-            </View>
+
             <Text style={styles.link} onPress={() => Linking.openURL(
                 `https://www.reddit.com/${post.url}`)}>
               View on Reddit
@@ -207,13 +206,6 @@ const styles = StyleSheet.create({
     height: 16,
     width: 18,
   },
-  headerText: {
-    flex: 1,
-    textAlign: 'right',
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: '#5daf26',
-  },
   postIndexItem: {
     flexDirection: 'column',
     justifyContent: 'center',
@@ -241,17 +233,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   scoreView: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   score: {
     fontSize: 20,
     color: '#5daf26',
+    fontWeight: 'bold',
   },
   upArrow: {
-    height: 18,
-    width: 18,
+    height: 24,
+    width: 24,
     marginRight: 2,
   },
   authorSubTime: {
