@@ -24,6 +24,7 @@ export default class PostDetail extends Component {
     this.elapsedTime = this.elapsedTime.bind(this);
     this._onLayout = this._onLayout.bind(this);
     this.setSize = this.setSize.bind(this);
+    this.hasHighQualityImage = this.hasHighQualityImage.bind(this);
   }
 
   componentDidMount() {
@@ -35,18 +36,33 @@ export default class PostDetail extends Component {
   }
 
   setSize() {
-    const url = this.props.post.data.url;
-    const windowSize = Dimensions.get('window');
-    this.setState({winWidth: windowSize.width});
-    Image.getSize(url, (width, height) => {
-      if ((width / height) > (windowSize.width / windowSize.height)) {
-        const imageHeight = (height * windowSize.width) / width;
-        this.setState({width: windowSize.width, height: imageHeight});
-      } else {
-        const imageWidth = (width * windowSize.height ) / height;
-        this.setState({width: imageWidth, height: windowSize.height});
+      const url = this.props.post.data.url;
+      const windowSize = Dimensions.get('window');
+      this.setState({winWidth: windowSize.width});
+      if (this.hasHighQualityImage()) {
+        Image.getSize(url, (width, height) => {
+          if ((width / height) > (windowSize.width / windowSize.height)) {
+            const imageHeight = (height * windowSize.width) / width;
+            this.setState({width: windowSize.width, height: imageHeight});
+          } else {
+            const imageWidth = (width * windowSize.height ) / height;
+            this.setState({width: imageWidth, height: windowSize.height});
+          }
+        });
       }
-    });
+  }
+
+  hasHighQualityImage() {
+    const url = this.props.post.data.url;
+    if ( Platform.OS === 'ios' &&
+         url.slice(url.length - 4, url.length) === ".jpg" ) {
+        return true;
+    } else if ( url.slice(url.length - 4, url.length) === ".gif" ||
+                url.slice(url.length - 4, url.length) === ".jpg" ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   createIndexScene() {
@@ -92,8 +108,7 @@ export default class PostDetail extends Component {
     let uriObj;
     let img;
 
-    if (url.slice(url.length - 4, url.length) === ".gif" ||
-        url.slice(url.length - 4, url.length) === ".jpg") {
+    if (this.hasHighQualityImage()) {
       let uriObj = {uri: url};
 
       img = <View style={{height: (this.state.height),
