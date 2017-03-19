@@ -119,7 +119,7 @@ export default class PostDetail extends Component {
                           alignSelf: 'stretch',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          backgroundColor: '#1a330a',
+                          backgroundColor: '#070f02',
                           flex: 1,
                         }}>
               <Image
@@ -183,6 +183,7 @@ export default class PostDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'column',
     alignSelf: 'stretch',
     alignItems: 'center',
