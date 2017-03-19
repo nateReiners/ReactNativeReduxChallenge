@@ -41,12 +41,12 @@ export default class PostDetail extends Component {
       this.setState({winWidth: windowSize.width});
       if (this.hasHighQualityImage()) {
         Image.getSize(url, (width, height) => {
-          if ((width / height) > (windowSize.width / windowSize.height)) {
-            const imageHeight = (height * windowSize.width) / width;
-            this.setState({width: windowSize.width, height: imageHeight});
+          if ((width / height) > (windowSize.width / (windowSize.height - 68))) {
+              const imageHeight = (height * windowSize.width) / width;
+              this.setState({width: windowSize.width, height: imageHeight});
           } else {
             const imageWidth = (width * windowSize.height ) / height;
-            this.setState({width: imageWidth, height: windowSize.height});
+            this.setState({width: imageWidth, height: windowSize.height - 68});
           }
         });
       }
@@ -116,10 +116,12 @@ export default class PostDetail extends Component {
       let uriObj = {uri: url};
 
       img = <View style={{height: (this.state.height),
-                          width: this.state.width,
+                          alignSelf: 'stretch',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          backgroundColor: '#5daf26'}}>
+                          backgroundColor: '#070f02',
+                          flex: 1,
+                        }}>
               <Image
                 resizeMode="contain"
                 source={uriObj}
@@ -181,6 +183,7 @@ export default class PostDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'column',
     alignSelf: 'stretch',
     alignItems: 'center',
@@ -266,7 +269,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    bottom: 0,
-    right: 0,
+    bottom: -1,
+    right: -1,
   },
 });
