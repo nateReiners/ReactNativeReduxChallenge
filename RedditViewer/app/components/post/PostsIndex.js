@@ -82,7 +82,6 @@ export default class PostsIndex extends Component {
     });
 
     const posts = this.props.posts[this.state.currentTab];
-    console.log(posts);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const dataSource = ds.cloneWithRows(posts);
 
